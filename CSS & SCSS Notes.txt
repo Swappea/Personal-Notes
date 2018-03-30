@@ -1,0 +1,7 @@
+CSS & SCSS
+
+Module 2 - Basics of CSS
+-- How to add css to html
+-- setup CSS rules
+-- selectors, properties and Values
+-- Resolve Conflicting Styles

@@ -1,0 +1,44 @@
+function createCounter() {
+   let counter = 0
+   const myFunction = function() {
+     counter = counter + 1
+	 return counter
+   }
+   return myFunction
+}
+const increment = createCounter()
+const c1 = increment()
+const c2 = increment()
+const c3 = increment()
+console.log('example increment', c1, c2, c3);
+
+
+Closures are useful because they let you associate some data (the lexical environment) with a function that operates on that data
+
+function setValue() {
+    a = 10;
+	var b = 20;
+}
+setValue();
+
+Variable a gets created in global scope
+Variable b gets created in function scope
+
+
+Javascript hoisting
+ Any variable declaration inside a function scope is always pushed to the top with a value undefined. 
+ 
+Closures ---
+-- When JS creates function object, it also remembers the scope information of the function it declared
+-- when the function declaration is assigned to a variable, that variable has info about the function itself and all the variable's i.e. scope information
+-- It has pointer to those variable. This is what closure means. Closures means the function remembers the scope information
+
+
+-- Concept of a closure - a function which is able to remember and access its lexical scope even when that function is executing outside its lexical scope.
+
+-- Lexical scope is the scope defined at lexing time.
+-- during the lexing phase, the JavaScript engine declares the variables first, 
+-- before the following step in which the values are assigned to the identifiers - this is hoisting
+-- function scope of outer function === lexical scope of inner function
+
+-- for every execution of function, new variables are created in memory

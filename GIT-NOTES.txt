@@ -1,0 +1,104 @@
+GIT
+-- distributed version control system
+-- system that records changes to our files over time
+-- recall specific versions
+-- and team can collaborate over all the project versions
+-- store revisions of project history in one directory
+-- work on new features without messing up main codebase(branches)
+
+-- setting git config
+-- git config --global user.name ""
+-- git config --global user.email ""
+
+
+-- Repositories(Repo)
+-- container of project
+-- .git tells that it is a GIT Repo(if at the root then it will tracks all)
+-- .git tracks changes of that folder
+
+-- Commits
+-- Like Save points
+-- there can be many Commits
+-- we can rollback to any commit
+
+
+-- Modified
+-- make any changes but not yet committed
+-- Staging
+-- and any changed file to staging that you want to commit
+-- Commits
+-- Files in the staging are are added to commit when we make one
+
+-- git init to create a initialise a git repository
+-- git status gives status of files
+-- git add (filename) adds file to staging area
+-- git rm --cached (filename) to unstage file
+-- git add. adds everything to staging area
+
+-- git commit -m "commit message"
+-- git log gives commit history
+-- git log --oneline
+
+-- Undoing changes
+-- Checkout commit
+-- Revert commit 
+-- Reset commit
+
+
+-- git checkout (id of commit) -- go to that particular commit
+-- git checkout master (get back to master)
+
+-- git revert (id of that commit)
+-- it adds new commit which undones the commit that we want to revert
+-- it is still present in commit history
+
+-- git reset (id of commit) --- it will retain changes
+-- git reset --hard (id of commit)  --- it wont retain changes and make hard reset
+
+-- Creating branches
+-- Master Branch is stable version of code
+-- To add new features created another branch and if its stable
+-- then we can merge it with master branch
+-- the new branch is copy of master branch at that point and we can commit later on to master branch
+
+
+-- new branch
+-- git branch "name"
+
+-- list of branch
+-- git branch -a   
+
+-- checkout a branch
+-- git checkout "branchname"
+
+-- delete branch
+-- git branch -d "name"    (if branch is merged)
+
+-- git branch -D "name"    (if branch is not merged)
+
+
+-- git checkout -b "name" creates and checkout the branch
+
+-- Merging branches(& conflicts)
+-- to merge branch we need to be on master branch
+
+-- git merge 'branchname'
+
+
+-- GITHUB
+-- is an online hosted repository for our project 
+
+-- git push "https://github.com/Swappea/git-one.git" master 
+-- git remote add "alias name " (URL)
+-- git push aliasname master
+
+-- git clone "link"
+-- git remote -v 
+
+-- git pull origin master 
+
+-- pushing branch
+-- git push origin branchname
+
+-- then click on compare and pull request
+-- then pull the request to merge into master branch

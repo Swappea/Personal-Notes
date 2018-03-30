@@ -1,0 +1,268 @@
+What are the differences between AngularJS (angular 1.x) and Angular (Angular 2.x and beyond)?
+-- AngularJS is based on MVC, while Angular 2(& beyond) is based on MVVM
+-- Javascript vs Typescript
+-- Controller based UI vs Component based UI
+
+What is a component? Why would you use it?
+-- Components are the main way we build and specify elements and logic on the page, 
+-- through both custom elements and attributes that add functionality to our existing components.
+-- Provides Flexibility and Reusability
+-- @Component decorator is used
+What is the minimum definition of a component?
+-- Components are the most basic building block of an UI in an Angular application. 
+-- An Angular application is a tree of Angular components
+
+What is a module, and what does it contain?
+-- A module is a mechanism to group components, directives, pipes, services which are related
+-- There can be many modules which have to own set of components,etc
+-- Application is divided into many modules
+-- NgModule Decorator is Used
+
+Note: Component scope is limited to the module it is declared in, if other modules want to use it then the modules declaring it has to export the component
+	  Services are not scoped to module , they can be used globally. Can be injected anywhere in Application
+	  
+What is a service, and when will you use it?
+-- Services are a great way to share information among classes that don't know each other.
+-- There can be many common functions that component uses. So service can be used to group those common functions together
+-- The @Injectable() decorator tells Angular that this service might itself have injected dependencies.
+-- An Angular injector is responsible for creating service instances and injecting them into classes
+-- You rarely create an Angular injector yourself. 
+-- Angular creates injectors for you as it executes the app, starting with the root injector that it creates during the bootstrap process.
+-- Providers tell the injector how to create the service. 
+-- Without a provider, the injector would not know that it is responsible for injecting the service nor be able to create the service.
+-- Services are singletons within the scope of an injector. There is at most one instance of a service in a given injector.
+
+What is a promise? Explain it laymen's terms.
+-- A Promise is an object representing the eventual completion or failure of an asynchronous operation. 
+-- Essentially, a promise is a returned object you attach callbacks to, instead of passing callbacks into a function.
+-- The promise constructor takes in one argument: a callback function with two parameters - resolve and reject.
+-- A promise has 3 states - Pending, Resolve, Reject
+-- To take some action once the promise is resolved or rejected, we use .then and .catch to handle our action.
+-- Promises are chainable.
+-- Promise is Async
+
+Note: Observables: 
+-- Observables are lazy event streams which can emit zero or more events, and may or may not finish.
+-- Observables are cancellable
+-- Observable are lazy
+-- Function passed to Observable constructor gets called only when someone actually subscribes to an Observable
+
+What are the lifecycle hooks for components and directives?
+-- ngOnInit()
+-- The ngOnInit method of a component is called directly after the constructor and after the ngOnChange is triggered for the first time. 
+-- It is the perfect place for initialisation work.
+
+-- ngOnChanges()
+-- Respond when Angular (re)sets data-bound input properties. 
+-- The method receives a SimpleChanges object of current and previous property values.
+-- Called before ngOnInit() and whenever one or more data-bound input properties change.
+Note:
+-- Angular only calls the hook when the value of the input property changes. 
+-- The value of the hero property is the reference to the hero object. 
+-- Angular doesn't care that the hero's own name property changed. 
+-- The hero object reference didn't change so, from Angular's perspective, there is no change to report!
+
+-- ngDoCheck()
+-- Detect and act upon changes that Angular can't or won't detect on its own.
+-- Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+-- Use this method to detect a change that Angular overlooked.
+
+-- ngAfterContentInit()
+-- The ngAfterContentInit lifecycle hook is called after ngOnInit when the component or directive’s content has been initialised.
+-- Basically when all the bindings of the component have been checked for the first time.
+-- contentChild is set after the content has been initialized
+
+-- ngAfterContentChecked
+-- Called after every check of the component or directive’s content, 
+-- effectively when all the bindings of the components have been checked; even if they haven’t changed.
+-- contentChild is updated after the content has been checked
+
+-- Content projection is a way to import HTML content from outside the component and insert that content into the component's template in a designated spot.
+-- Similar to Angular JS transclusion
+
+-- The AfterView hooks concern ViewChildren, the child components whose element tags appear within the component's template.
+-- The AfterContent hooks concern ContentChildren, the child components that angular projected into the component
+
+-- ngAfterViewInit
+-- Called after ngAfterContentInit when the component’s view has been initialised. Applies to components only.
+-- viewChild is set after the view has been initialized
+
+-- ngAfterViewChecked
+-- Called after every check of the component’s view. Applies to components only. 
+-- When all the bindings of the children directives have been checked; even if they haven’t changed. 
+-- It can be useful if the component is waiting for something coming from its child components.
+-- viewChild is updated after the view has been checked
+
+
+-- ngOnDestroy
+-- The ngDestroy is called in a component’s lifecycle just before the instance of the component is finally destroyed. 
+-- It is the perfect place to clean the component . for example, to cancel background tasks.
+
+What are pipes? Give me an example.
+-- A pipe takes in data as input and transforms it to a desired output.
+-- Eg: Async, Currency, Date, Decimal, JSON, LowerCase and UpperCase , Percent, Slice
+-- Custom pipes can be created
+-- Transform method has to be implemented
+-- @Pipe Decorator is used to decorate class as pipe
+
+What are the differences between reactive forms and template driven forms?
+-- Template driven form is something when we write logic, validation , controls everything in the template part(html code). 
+-- The template is responsible for setting up the form, the validations.
+
+-- In Reactive forms all the logic validation part in the component side. 
+-- For the reactive approach you are doing all that in code in the component.
+
+What is a dumb, or presentation, component? What are the benefits of using dumb components?
+-- Presentation or dumb component is basically a component which can be reused across Application
+-- It doesn't contain any dependency with services or anything
+-- It takes the data via @Input and emits with @Output
+-- Its just for presentation which can be reused
+
+
+Notes:
+
+@NgModule.providers vs @Component.providers
+
+Angular module providers (@NgModule.providers) are registered with the application's root injector. 
+Angular can inject the corresponding services in any class it creates. 
+Once created, a service instance lives for the life of the app and Angular injects this one service instance in every class that needs it.
+
+A component's providers (@Component.providers) are registered with each component instance's own injector.
+Angular can only inject the corresponding services in that component instance or one of its descendant component instances. 
+Angular cannot inject the same service instance anywhere else.
+Note that a component-provided service may have a limited lifetime. 
+Each new instance of the component gets its own instance of the service and, when the component instance is destroyed, so is that service instance.
+
+How do components communicate with each other?
+-- 2 ways of communication
+-- 1) Using Parent-Child Communication (@Input() & @Output())
+-- 2) Services
+
+How would you use http to load data from server?
+-- HttpClient in @angular/common/http in angular 4
+-- http.get().subscribe().error();
+How do you create routes?
+-- import RouterModule and Routes from @angular/router package
+-- then create a constant array(appRoutes:Routes) of type Routes
+-- pass it to the RouterModule.forRoot(appRoutes) method
+-- <router-outlet></router-outlet> tag to display the dynamically loaded component using route(view will be displayed after the tag)
+-- using routerLink='/routePath' we can use this on anchor tag or button to navigate
+How can you get the current state of a route?
+-- we can acess router state from current Route using Router service
+-- Activated Route gives information about parent,child & sibling routes
+-- It is an injected router service
+-- Router emits navigation event using Router.events 
+How do you create two-way data binding?
+-- [(ngModel)]
+How do you load external modules?
+-- importing modules in RootModule
+How would you display form validation errors?
+-- this.formName.controls gives list of errors in obj format 
+Which lifecycle hook would you use to unsubscribe an observable?
+-- ngOnDestroy()
+How are services injected to your application?
+-- provide it in providers array and then create instance in constructor of component
+How would you create route parameters and access them from a component?
+-- 2 ways to get router parameters -- 1) using snapshot of route 2) using observable way
+-- create route param for particular route is using : syntax (e.g.: users/: username)
+-- [routerLink]="['/users', username]
+-- 1)  route of type ActivatedRoute --- grab parameter - this.route.snapshot.params.username
+-- 2) this.route.paramMap.subscribe(params => {
+		this.username = params.get('username');
+	});
+	-- paramMap in Angular 4
+	-- params in Angular 2
+
+What is the difference between an observable and a promise?
+-- Promise:
+-- 	returns a single value
+-- 	not cancellable
+-- 	more readable code with try/catch and async/await
+-- Observable:
+--  works with multiple values over time
+--  cancellable
+--  supports map, filter, reduce and similar operators
+--  use Reactive Extensions (RxJS)
+--  an array whose items arrive asynchronously over time
+
+What is the difference between a component and a directive?
+-- Component is type of directive which has template, logic and styling
+-- It can contain other directive's (custom or built-in)
+-- Structural Directives affect the dom -- e.g: *ngFor and *ngIf
+-- Attribute Directives gives custom behaviour or style for existing element like ngStyle or we can create custom
+
+-- Component have their own view's . Directives are just behaviour added to existing element or component
+
+Why would you use typescript aka benefits of typescript?
+-- Class and Module Support
+-- Static Type-checking
+-- ES6 Feature Support
+-- Clear Library API Definition
+-- Build-in Support for JavaScript Packaging
+-- Syntax Similarity to Our Backend Languages (Java, Scala)
+-- Superset of JavaScript
+
+Why different life cycle hooks are needed for a component/directive?
+Why does angular use rxjs?
+What is the purpose of using zone.js?
+-- A zone is an execution context that persists across async tasks, 
+-- and allows the creator of the zone to observe and control execution of the code within the zone.
+-- Zones patches async api (like events, xmlhttpreqeusts, timers)
+-- Hence angular knows when to update DOM 
+-- Also zonejs is useful for debugging, testing, profiling. It helps you see whole call stack if you face with some error.
+What is the difference between ngOnInit() and the constructor() of a component?
+-- Constructor is default method of class which is executed when class is instantiated.
+-- It ensures proper initialisation of fields in class
+-- The DI in angular analyzes constructor parameters and creates new instance of provided service
+-- ngOnInit() is lifecycle hook of angular which is called after constructor
+-- It is used to do initialisation/declaration work needed by class (like server calls)
+
+When will ngOnInit() be called? How would you make use of ngOnInit()?
+-- ngOnInit() is lifecycle hook of angular which is called after constructor
+-- It is used to do initialisation/declaration work needed by class (like server calls)
+What are the benefits of using formBuilder?
+-- Avoids repetition of creating formControls
+-- It is handle by formBuilder itself
+-- FormBuilder.group is a factory method that creates form group
+-- It takes an Object whose key's and value's are form control names and their definition(dataValue, Validators if any)
+-- Nested Form Group can also be created
+
+
+
+
+
+
+
+
+
+-- Lazy Loading Module
+-- { path: 'lazy', loadChildren: 'lazy/lazy.module#LazyModule' }
+-- loadChildren: 'path#class'
+-- Links:
+https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+https://github.com/Yonet/Angular-Interview-Questions
+https://github.com/khan4019/angular-interview-questions
+
+
+
+
+
+
+
+Pipes
+
+Pure Pipe and Impure Pipes
+
+Pure Function as a function that doesn’t have an internal state
+It means that all operations it performs are not affected by that state and given the same input parameters and produces the same deterministic output.
+An impure pipe does the same but its transform() method is called much more often. 
+If xxx in {{xxx | filter}} is an array and an item gets added or removed, 
+then a pure pipe won't be called because Angular doesn't recognize xxx as changed because it's the same xxx (with a different content though). 
+If you make it pure: false then Angular2 doesn't care whether xxx has changed or not it calls the transform() every time change detection is executed
+
+
+
+
+
+
