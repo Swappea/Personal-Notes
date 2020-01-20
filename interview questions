@@ -1,0 +1,21 @@
+Promises and Callback
+what is diff between promise and callback?
+what is callback hell? https://colintoh.com/blog/staying-sane-with-asynchronous-programming-promises-and-generators
+
+Event Propogation concept
+
+ES6 features
+
+What is difference between map, filter, reduce, foreach
+
+
+find count of each element in array
+remove duplicate elements from array
+
+var name = "test"
+
+what will be typeof  name ? (it will be sttring as it is property of window object)
+
+Advantages and Pitfalls of Arrow Functions
+
+What if we use public instead of private in injected service inside angular component constructor?
